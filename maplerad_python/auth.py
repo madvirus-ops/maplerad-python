@@ -2,6 +2,7 @@ import os
 import requests
 from requests.adapters import HTTPAdapter
 from .customer import Customer
+from .issuing import Issuing
 
 
 
@@ -42,12 +43,20 @@ class Authenticate:
 
     
     def customer(self):
+        """
+        customer related
+        """
         return Customer(self.__request__)
+    
+    def issuing(self):
+        """issuing related"""
+        return Issuing(self.__request__)
         
 
 
 auth = Authenticate("shshsj","PRODUCTION")
 cus = auth.customer()
+iss = auth.issuing()
 
 
 

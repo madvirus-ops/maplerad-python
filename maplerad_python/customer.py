@@ -39,7 +39,10 @@ class Customer:
                     },
                 photo": user.profile_picture
                 }
-            >>> customer = create_full_customer(payload)
+            >>> from maplerad_python import Authenticate
+            >>> auth = Authenticate(secret_key,"DEVELOPMENT")
+            >>> customer = auth.customer()
+            >>> print(customer.create_full_customer(payload))
 
         """
         try:
@@ -56,6 +59,8 @@ class Customer:
         except (ConnectionError, ConnectTimeout, HTTPError):
             raise PostException("Error connection to maplerad")
 
+    
+    
     def get_customer_details(self, customer_id):
         """
         get the customer details from maplerad
