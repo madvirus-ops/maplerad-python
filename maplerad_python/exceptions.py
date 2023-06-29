@@ -1,0 +1,3 @@
+
+class PostException(Exception):
+    pass
