@@ -74,7 +74,7 @@ result = customer.get_all_customers()
 issuing = auth.issuing()
 payload = {
     "customer_id": "123456789",
-    "type": CardType.VIRTUAL.value,
+    "type": "VIRTUAL",
     "currency": "USD",
     "auto_approve": True,
     "brand": "VISA",
