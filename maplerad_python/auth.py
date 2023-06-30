@@ -82,9 +82,9 @@ class Authenticate:
     
     def __request__(self,method,path,**kwargs):
         if self.environment == "PRODUCTION":
-            url = "production.com"+path
+            url = "https://api.maplerad.com/"+path
         else:
-            url = "sandbox.maplerad.com"+path
+            url = "https://sandbox.api.maplerad.com"+path
         
         self.session.request(method,url,json=None,)
 
