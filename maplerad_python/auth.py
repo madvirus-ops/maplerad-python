@@ -46,7 +46,8 @@ from .collections import Collections
 from .counterparty import Counterparty
 from .fx import Fx
 from .identity import Identity
-
+from .institution import Institution
+from .issuing import Issuing
 
 
 class Authenticate:
@@ -110,11 +111,24 @@ class Authenticate:
         return Counterparty(self.__request__)
     
     def fx(self):
+        """foreign exchange"""
         return Fx(self.__request__)
 
 
     def identity(self):
+        """Identity"""
         return Identity(self.__request__)
+    
+    def institution(self):
+        "institutions"
+        return Institution(self.__request__)
+    
+    def issuing(self):
+        return Issuing(self.__request__)
+    
+
+
+
 
 
 auth = Authenticate("shshsj","PRODUCTION")
