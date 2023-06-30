@@ -42,7 +42,8 @@ from requests.adapters import HTTPAdapter
 from .customer import Customer
 from .issuing import Issuing
 from .bill import Bills
-
+from .collections import Collections
+from .counterparty import Counterparty
 
 
 
@@ -94,8 +95,17 @@ class Authenticate:
     
     
     def bills(self):
+        """for bills"""
         return Bills(self.__request__)
         
+
+    def collections(self):
+        """for collections"""
+        return Collections(self.__request__)
+    
+    def counterparty(self):
+        """country party"""
+        return Counterparty(self.__request__)
 
 
 auth = Authenticate("shshsj","PRODUCTION")
