@@ -35,82 +35,29 @@
 
 
 
-
 from typing import Dict
 
-
-
-class Counterparty:
+class Identity:
     def __init__(self, request):
         self.request = request
 
-    def blacklist(self, counterpartyID: str, status: bool):
+    def verify_identity(self, bvn: str):
         """
-        Blacklist a counterparty.
+        Verify identity using BVN (Bank Verification Number).
 
-        :param counterpartyID: ID of the counterparty to blacklist.
-        :param status: Blacklist status (True or False).
+        :param bvn: BVN to verify.
         :return: Response object from the API.
 
         Usage:
         >>> from maplerad_python import Authenticate
         >>> auth = Authenticate(secret_key,"DEVELOPMENT")
-        >>> counterparty = auth.counterparty()
-        >>> result = counterparty.blacklist(counterpartyID, status)
+        >>> identity = auth.identity()
+        >>> result = identity.verify_identity(bvn)
         """
         try:
-            endpoint = f"/counterparties/blacklist/{counterpartyID}"
-            payload = {"blacklist": status}
+            endpoint = "/identity"
+            payload = {"bvn": bvn}
             response = self.request("POST", endpoint, json=payload)
-
-            if response.status_code in (200, 201):
-                return response
-            else:
-                return response.json()
-
-        except Exception as error:
-            return error
-
-    def get_counterparty(self, counterpartyID: str):
-        """
-        Get details of a counterparty.
-
-        :param counterpartyID: ID of the counterparty.
-        :return: Response object from the API.
-
-        Usage:
-        >>> from maplerad_python import Authenticate
-        >>> auth = Authenticate(secret_key,"DEVELOPMENT")
-        >>> counterparty = auth.counterparty()
-        >>> result = counterparty.get_counterparty(counterpartyID)
-        """
-        try:
-            endpoint = f"/counterparties/{counterpartyID}"
-            response = self.request("GET", endpoint)
-
-            if response.status_code in (200, 201):
-                return response
-            else:
-                return response.json()
-
-        except Exception as error:
-            return error
-
-    def get_all_counterparties(self):
-        """
-        Get all counterparties.
-
-        :return: Response object from the API.
-
-        Usage:
-        >>> from maplerad_python import Authenticate
-        >>> auth = Authenticate(secret_key,"DEVELOPMENT")
-        >>> counterparty = auth,counterparty()
-        >>> result = counterparty.get_all_counterparties()
-        """
-        try:
-            endpoint = "/counterparties"
-            response = self.request("GET", endpoint)
 
             if response.status_code in (200, 201):
                 return response

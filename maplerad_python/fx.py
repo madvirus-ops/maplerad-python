@@ -36,31 +36,28 @@
 
 
 
+
 from typing import Dict
 
-
-
-class Counterparty:
+class Fx:
     def __init__(self, request):
         self.request = request
 
-    def blacklist(self, counterpartyID: str, status: bool):
+    def generate_quote(self, payload: Dict[str, str]):
         """
-        Blacklist a counterparty.
+        Generate a currency exchange quote.
 
-        :param counterpartyID: ID of the counterparty to blacklist.
-        :param status: Blacklist status (True or False).
+        :param payload: Quote payload containing source currency, target currency, and amount.
         :return: Response object from the API.
 
         Usage:
         >>> from maplerad_python import Authenticate
         >>> auth = Authenticate(secret_key,"DEVELOPMENT")
-        >>> counterparty = auth.counterparty()
-        >>> result = counterparty.blacklist(counterpartyID, status)
+        >>> fx = auth.fx()
+        >>> result = fx.generate_quote(payload)
         """
         try:
-            endpoint = f"/counterparties/blacklist/{counterpartyID}"
-            payload = {"blacklist": status}
+            endpoint = "/fx/quote"
             response = self.request("POST", endpoint, json=payload)
 
             if response.status_code in (200, 201):
@@ -71,22 +68,23 @@ class Counterparty:
         except Exception as error:
             return error
 
-    def get_counterparty(self, counterpartyID: str):
+    def exchange_currency(self, quote_reference: str):
         """
-        Get details of a counterparty.
+        Exchange currency based on a quote reference.
 
-        :param counterpartyID: ID of the counterparty.
+        :param quote_reference: Reference ID of the quote.
         :return: Response object from the API.
 
         Usage:
         >>> from maplerad_python import Authenticate
         >>> auth = Authenticate(secret_key,"DEVELOPMENT")
-        >>> counterparty = auth.counterparty()
-        >>> result = counterparty.get_counterparty(counterpartyID)
+        >>> fx = auth.fx()
+        >>> result = fx.exchange_currency(quote_reference)
         """
         try:
-            endpoint = f"/counterparties/{counterpartyID}"
-            response = self.request("GET", endpoint)
+            endpoint = "/fx"
+            payload = {"quote_reference": quote_reference}
+            response = self.request("POST", endpoint, json=payload)
 
             if response.status_code in (200, 201):
                 return response
@@ -96,20 +94,21 @@ class Counterparty:
         except Exception as error:
             return error
 
-    def get_all_counterparties(self):
+    def get_fx_history(self):
         """
-        Get all counterparties.
+        Get FX history.
 
         :return: Response object from the API.
 
         Usage:
         >>> from maplerad_python import Authenticate
         >>> auth = Authenticate(secret_key,"DEVELOPMENT")
-        >>> counterparty = auth,counterparty()
-        >>> result = counterparty.get_all_counterparties()
+        >>> fx = auth.fx()
+        >>> result = fx.get_fx_history()
+
         """
         try:
-            endpoint = "/counterparties"
+            endpoint = "/fx"
             response = self.request("GET", endpoint)
 
             if response.status_code in (200, 201):

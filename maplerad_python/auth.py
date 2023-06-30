@@ -44,6 +44,8 @@ from .issuing import Issuing
 from .bill import Bills
 from .collections import Collections
 from .counterparty import Counterparty
+from .fx import Fx
+from .identity import Identity
 
 
 
@@ -106,6 +108,13 @@ class Authenticate:
     def counterparty(self):
         """country party"""
         return Counterparty(self.__request__)
+    
+    def fx(self):
+        return Fx(self.__request__)
+
+
+    def identity(self):
+        return Identity(self.__request__)
 
 
 auth = Authenticate("shshsj","PRODUCTION")
