@@ -98,24 +98,345 @@ class Customer:
         except (ConnectionError, ConnectTimeout, HTTPError):
             raise PostException("Error connection to maplerad")
 
-    
-    
-    def get_customer_details(self, customer_id):
+
+    def create_customer(self, payload: dict):
         """
-        get the customer details from maplerad
+        Create a customer.
 
+        :param payload: Request payload as described in the documentation.
+        :return: JSON response from the API.
 
+        Usage:
+        >>> from maplerad_python import Authenticate
+        >>> auth = Authenticate(secret_key,"DEVELOPMENT")
+        >>> customer = auth.customer()
+        >>> payload = {
+                    "email": user.email,
+                    "first_name": user.first_name,
+                    "last_name": user.last_name,
+                    "country": country_type
+                }
+
+        >>> result = customer.create_customer(payload)
         """
         try:
-            path = f"/customers/{customer_id}"
-            response = self.request("GET", path)
+            endpoint = "/customers"
+            response = self.request("POST", endpoint, payload)
 
             if response.status_code in (200, 201):
                 return response.json()
             elif response.status_code == 401:
-                raise ConnectionRefusedError("Yuu are unauthorized, due to wrong keys")
+                raise ConnectionRefusedError("You are unauthorized due to wrong keys")
             else:
                 return response.json()
 
         except (ConnectionError, ConnectTimeout, HTTPError):
-            raise PostException("Error connection to maplerad")
+            raise PostException("Error connecting to maplerad")
+
+    def upgrade_customer_tier1(self, payload: dict):
+        """
+        Upgrade customer to Tier 1.
+
+        :param payload: Request payload as described in the documentation.
+        :return: JSON response from the API.
+
+        Usage:
+        >>> from maplerad_python import Authenticate
+        >>> auth = Authenticate(secret_key,"DEVELOPMENT")
+        >>> customer = auth.customer()
+        >>> payload = {
+                    "customer_id": customer_id,
+                    "phone": {
+                        "phone_number": phone_number,
+                        "phone_short_code": phone_short_code
+                    },
+                    "address": {
+                        "city": address.city,
+                        "country": address.country,
+                        "postal_code": address.postal_code,
+                        "state": address.state,
+                        "street": address.street,
+                        "street2": address.street2
+                    },
+                    "dob": dob,
+                    "identification_number": identification_number
+                }
+
+        >>> result = customer.upgrade_customer_tier1(payload)
+        """
+        try:
+            endpoint = "/customers/upgrade/tier1"
+            response = self.request("PATCH", endpoint, payload)
+
+            if response.status_code in (200, 201):
+                return response.json()
+            elif response.status_code == 401:
+                raise ConnectionRefusedError("You are unauthorized due to wrong keys")
+            else:
+                return response.json()
+
+        except (ConnectionError, ConnectTimeout, HTTPError):
+            raise PostException("Error connecting to maplerad")
+
+    def upgrade_customer_tier2(self, payload: dict):
+        """
+        Upgrade customer to Tier 2.
+
+        :param payload: Request payload as described in the documentation.
+        :return: JSON response from the API.
+
+        Usage:
+        >>> from maplerad_python import Authenticate
+        >>> auth = Authenticate(secret_key,"DEVELOPMENT")
+        >>> payload = {
+                "customer_id": customer_id,
+                "identity": {
+                    "country": identity.country,
+                    "image": identity.image,
+                    "number": identity.number,
+                    "type": identity.type
+                }
+            }
+
+        >>> result = customer.upgrade_customer_tier2(payload)
+        """
+        try:
+            endpoint = "/customers/upgrade/tier2"
+            response = self.request("PATCH", endpoint, payload)
+
+            if response.status_code in (200, 201):
+                return response.json()
+            elif response.status_code == 401:
+                raise ConnectionRefusedError("You are unauthorized due to wrong keys")
+            else:
+                return response.json()
+
+        except (ConnectionError, ConnectTimeout, HTTPError):
+            raise PostException("Error connecting to maplerad")
+
+    def get_customer(self, customer_id: str):
+        """
+        Get customer details.
+
+        :param customer_id: ID of the customer.
+        :return: JSON response from the API.
+
+        Usage:
+        >>> from maplerad_python import Authenticate
+        >>> auth = Authenticate(secret_key,"DEVELOPMENT")
+        >>> result = customer.get_customer(customer_id)
+        """
+        try:
+            endpoint = f"/customers/{customer_id}"
+            response = self.request("GET", endpoint)
+
+            if response.status_code in (200, 201):
+                return response.json()
+            elif response.status_code == 401:
+                raise ConnectionRefusedError("You are unauthorized due to wrong keys")
+            else:
+                return response.json()
+
+        except (ConnectionError, ConnectTimeout, HTTPError):
+            raise PostException("Error connecting to maplerad")
+
+    def get_all_customers(self):
+        """
+        Get details of all customers.
+
+        :return: JSON response from the API.
+
+        Usage:
+        >>> from maplerad_python import Authenticate
+        >>> auth = Authenticate(secret_key,"DEVELOPMENT")
+        >>> result = customer.get_all_customers()
+        """
+        try:
+            endpoint = "/customers"
+            response = self.request("GET", endpoint)
+
+            if response.status_code in (200, 201):
+                return response.json()
+            elif response.status_code == 401:
+                raise ConnectionRefusedError("You are unauthorized due to wrong keys")
+            else:
+                return response.json()
+
+        except (ConnectionError, ConnectTimeout, HTTPError):
+            raise PostException("Error connecting to maplerad")
+
+    def get_customer_cards(self, customer_id: str):
+        """
+        Get customer's cards.
+
+        :param customer_id: ID of the customer.
+        :return: JSON response from the API.
+
+        Usage:
+        >>> from maplerad_python import Authenticate
+        >>> auth = Authenticate(secret_key,"DEVELOPMENT")
+        >>> result = customer.get_customer_cards(customer_id)
+        """
+        try:
+            endpoint = f"/customers/{customer_id}/cards"
+            response = self.request("GET", endpoint)
+
+            if response.status_code in (200, 201):
+                return response.json()
+            elif response.status_code == 401:
+                raise ConnectionRefusedError("You are unauthorized due to wrong keys")
+            else:
+                return response.json()
+
+        except (ConnectionError, ConnectTimeout, HTTPError):
+            raise PostException("Error connecting to maplerad")
+
+    def get_customer_transactions(self, customer_id: str):
+        """
+        Get customer's transactions.
+
+        :param customer_id: ID of the customer.
+        :return: JSON response from the API.
+
+        Usage:
+        >>> from maplerad_python import Authenticate
+        >>> auth = Authenticate(secret_key,"DEVELOPMENT")
+        >>> result = customer.get_customer_transactions(customer_id)
+        """
+        try:
+            endpoint = f"/customers/{customer_id}/transactions"
+            response = self.request("GET", endpoint)
+
+            if response.status_code in (200, 201):
+                return response.json()
+            elif response.status_code == 401:
+                raise ConnectionRefusedError("You are unauthorized due to wrong keys")
+            else:
+                return response.json()
+
+        except (ConnectionError, ConnectTimeout, HTTPError):
+            raise PostException("Error connecting to maplerad")
+
+    def get_customer_virtual_accounts(self, customer_id: str):
+        """
+        Get customer's virtual accounts.
+
+        :param customer_id: ID of the customer.
+        :return: JSON response from the API.
+
+        Usage:
+        >>> from maplerad_python import Authenticate
+        >>> auth = Authenticate(secret_key,"DEVELOPMENT")
+        >>> result = customer.get_customer_virtual_accounts(customer_id)
+        """
+        try:
+            endpoint = f"/customers/{customer_id}/virtual-account"
+            response = self.request("GET", endpoint)
+
+            if response.status_code in (200, 201):
+                return response.json()
+            elif response.status_code == 401:
+                raise ConnectionRefusedError("You are unauthorized due to wrong keys")
+            else:
+                return response.json()
+
+        except (ConnectionError, ConnectTimeout, HTTPError):
+            raise PostException("Error connecting to maplerad")
+
+    def customer_card_enrollment(self, customer_id: str, brand: str):
+        """
+        Perform customer card enrollment.
+
+        :param customer_id: ID of the customer.
+        :param brand: Brand of the card.
+        :return: JSON response from the API.
+
+        Usage:
+        >>> from maplerad_python import Authenticate
+        >>> auth = Authenticate(secret_key,"DEVELOPMENT")
+        >>> result = customer.customer_card_enrollment(customer_id, brand)
+        """
+        try:
+            endpoint = "/customers/card-enroll"
+            payload = {'customer_id': customer_id, 'brand': brand}
+            response = self.request("PATCH", endpoint, payload)
+
+            if response.status_code in (200, 201):
+                return response.json()
+            elif response.status_code == 401:
+                raise ConnectionRefusedError("You are unauthorized due to wrong keys")
+            else:
+                return response.json()
+
+        except (ConnectionError, ConnectTimeout, HTTPError):
+            raise PostException("Error connecting to maplerad")
+
+    def update_customer(self, payload: dict):
+        """
+        Update customer details.
+
+        :param payload: Request payload as described in the documentation.
+        :return: JSON response from the API.
+
+        Usage:
+        >>> from maplerad_python import Authenticate
+        >>> auth = Authenticate(secret_key,"DEVELOPMENT")
+        >>> payload = {
+                "customer_id": customer_id,
+                "photo": photo,
+                "phone": {
+                    "phone_number": phone.phone_number,
+                    "phone_country_code": phone.phone_country_code
+                },
+                "middle_name": middle_name,
+                "identity": {
+                    "country": identity.country,
+                    "image": identity.image,
+                    "number": identity.number,
+                    "type": identity.type
+                }
+            }
+
+        >>> result = customer.update_customer(payload)
+        """
+        try:
+            endpoint = "/customers/update"
+            response = self.request("PATCH", endpoint, payload)
+
+            if response.status_code in (200, 201):
+                return response.json()
+            elif response.status_code == 401:
+                raise ConnectionRefusedError("You are unauthorized due to wrong keys")
+            else:
+                return response.json()
+
+        except (ConnectionError, ConnectTimeout, HTTPError):
+            raise PostException("Error connecting to maplerad")
+
+    def set_customer_blacklist_active(self, customer_id: str, status: bool):
+        """
+        Set customer blacklist status.
+
+        :param customer_id: ID of the customer.
+        :param status: Blacklist status (True/False).
+        :return: JSON response from the API.
+
+        Usage:
+        >>> from maplerad_python import Authenticate
+        >>> auth = Authenticate(secret_key,"DEVELOPMENT")
+        >>> result = customer.set_customer_blacklist_active(customer_id, status)
+        """
+        try:
+            endpoint = f"/customers/{customer_id}/active"
+            payload = {'blacklist': status}
+            response = self.request("POST", endpoint, payload)
+
+            if response.status_code in (200, 201):
+                return response.json()
+            elif response.status_code == 401:
+                raise ConnectionRefusedError("You are unauthorized due to wrong keys")
+            else:
+                return response.json()
+
+        except (ConnectionError, ConnectTimeout, HTTPError):
+            raise PostException("Error connecting to maplerad")
