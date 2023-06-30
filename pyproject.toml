@@ -1,15 +1,23 @@
 [tool.poetry]
 name = "maplerad-python"
-version = "0.1.0"
+version = "1.0.0"
 description = "API wrapper for Maplerad"
 authors = ["madvirus-ops <edwinayabie1@gmail.com>"]
 homepage = "https://maplerad.com"
+documentation = "https://maplerad.dev/reference"
 readme="README.md"
+license = "MIT"
+maintainers = [
+    "madvirus-ops <edwinayabie1@gmail.com>"
+]
+repository = "https://github.com/madvirus-ops/maplerad-python"
+keywords = ["maplerad", "maplerad python package","maplerad python wrapper"]
 
 
 
 [tool.poetry.dependencies]
 python = "^3.10"
+requests = "^2.31.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
