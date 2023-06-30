@@ -48,6 +48,8 @@ from .fx import Fx
 from .identity import Identity
 from .institution import Institution
 from .issuing import Issuing
+from .transactions import Transactions
+from .misc import Misc
 
 
 class Authenticate:
@@ -126,7 +128,11 @@ class Authenticate:
     def issuing(self):
         return Issuing(self.__request__)
     
-
+    def misc(self):
+        return Misc(self.__request__)
+    
+    def transactions(self):
+        return Transactions(self.__request__)
 
 
 
