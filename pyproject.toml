@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "maplerad-python"
-version = "1.0.0"
+version = "1.0.1"
 description = "API wrapper for Maplerad"
 authors = ["madvirus-ops <edwinayabie1@gmail.com>"]
 homepage = "https://maplerad.com"
