@@ -49,7 +49,7 @@ class Customer:
         """
         The class to create the full customer
 
-        :param payload: the request dict as seen in `https://maplerad.dev/docs/create-customer`
+        :param payload: the request dict as seen in `the docs
 
         Usage::
             >>> payload = {
@@ -240,7 +240,7 @@ class Customer:
         except (ConnectionError, ConnectTimeout, HTTPError):
             raise PostException("Error connecting to maplerad")
 
-    def get_all_customers(self):
+    def get_all_customers(self,page:int=1,page_size:int=100):
         """
         Get details of all customers.
 
@@ -252,7 +252,7 @@ class Customer:
         >>> result = customer.get_all_customers()
         """
         try:
-            endpoint = "/customers"
+            endpoint = f"/customers?page={page}&page_size={page_size}"
             response = self.request("GET", endpoint)
 
             if response.status_code in (200, 201):
@@ -261,6 +261,7 @@ class Customer:
                 raise ConnectionRefusedError("You are unauthorized due to wrong keys")
             else:
                 return response.json()
+            
 
         except (ConnectionError, ConnectTimeout, HTTPError):
             raise PostException("Error connecting to maplerad")

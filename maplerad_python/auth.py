@@ -71,7 +71,7 @@ class Authenticate:
         """
         session = requests.Session()
         adapter = HTTPAdapter(max_retries=3)
-        for scheme in ["https://","https://"]:
+        for scheme in ["https://","http://"]:
             session.mount(scheme,adapter)
         session.headers.update({
             "accept": "application/json",
@@ -80,13 +80,16 @@ class Authenticate:
         })
         return session
     
-    def __request__(self,method,path,**kwargs):
+    def __request__(self, method, path, **kwargs):
         if self.environment == "PRODUCTION":
-            url = "https://api.maplerad.com/"+path
+            url = "https://api.maplerad.com/v1" + path
         else:
-            url = "https://sandbox.api.maplerad.com"+path
-        
-        self.session.request(method,url,json=None,)
+            url = "https://sandbox.api.maplerad.com/v1" + path
+
+        response = self.session.request(method, url=url, **kwargs)
+        print("Request URL:", response.url)  # Print the complete URL
+
+        return response
 
     
     def customer(self):
