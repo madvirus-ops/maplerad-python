@@ -121,7 +121,7 @@ class Customer:
         """
         try:
             endpoint = "/customers"
-            response = self.request("POST", endpoint, payload)
+            response = self.request("POST", endpoint, json=payload)
 
             if response.status_code in (200, 201):
                 return response.json()
@@ -166,7 +166,7 @@ class Customer:
         """
         try:
             endpoint = "/customers/upgrade/tier1"
-            response = self.request("PATCH", endpoint, payload)
+            response = self.request("PATCH", endpoint, json=payload)
 
             if response.status_code in (200, 201):
                 return response.json()
@@ -202,7 +202,7 @@ class Customer:
         """
         try:
             endpoint = "/customers/upgrade/tier2"
-            response = self.request("PATCH", endpoint, payload)
+            response = self.request("PATCH", endpoint, json=payload)
 
             if response.status_code in (200, 201):
                 return response.json()
@@ -359,7 +359,7 @@ class Customer:
         try:
             endpoint = "/customers/card-enroll"
             payload = {'customer_id': customer_id, 'brand': brand}
-            response = self.request("PATCH", endpoint, payload)
+            response = self.request("PATCH", endpoint, json=payload)
 
             if response.status_code in (200, 201):
                 return response.json()
@@ -401,7 +401,7 @@ class Customer:
         """
         try:
             endpoint = "/customers/update"
-            response = self.request("PATCH", endpoint, payload)
+            response = self.request("PATCH", endpoint, json=payload)
 
             if response.status_code in (200, 201):
                 return response.json()
@@ -429,7 +429,7 @@ class Customer:
         try:
             endpoint = f"/customers/{customer_id}/active"
             payload = {'blacklist': status}
-            response = self.request("POST", endpoint, payload)
+            response = self.request("POST", endpoint, json=payload)
 
             if response.status_code in (200, 201):
                 return response.json()

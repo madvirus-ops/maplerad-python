@@ -41,6 +41,7 @@ import requests
 from requests.adapters import HTTPAdapter
 from .customer import Customer
 from .issuing import Issuing
+from .bill import Bills
 
 
 
@@ -73,11 +74,11 @@ class Authenticate:
     
     def __request__(self,method,path,**kwargs):
         if self.environment == "PRODUCTION":
-            url = "https://production.com"+path
+            url = "production.com"+path
         else:
-            url = "https://sandbox.maplerad.com"+path
+            url = "sandbox.maplerad.com"+path
         
-        self.session.request(method,url,**kwargs)
+        self.session.request(method,url,json=None,)
 
     
     def customer(self):
@@ -89,12 +90,16 @@ class Authenticate:
     def issuing(self):
         """issuing related"""
         return Issuing(self.__request__)
+    
+    
+    
+    def bills(self):
+        return Bills(self.__request__)
         
 
 
 auth = Authenticate("shshsj","PRODUCTION")
 cus = auth.customer()
 iss = auth.issuing()
-
 
 
