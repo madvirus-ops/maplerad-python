@@ -1,7 +1,6 @@
 
 
-
-"""
+<h3>
     Maplerad API wrapper.
 
     @author Edwin Ayabie.
@@ -33,43 +32,4 @@
     OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
     OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-"""
-from requests import RequestException, ConnectionError
-
-
-class Error(RequestException):
-    """Summary."""
-
-    pass
-
-
-class APIError(Error):
-    """Summary."""
-
-    pass
-
-
-class APIConnectionError(Error, ConnectionError):
-    """Summary."""
-
-    pass
-
-
-class ValidationError(Error):
-    """Summary."""
-
-    pass
-
-
-class AuthorizationError(Error):
-    """Summary."""
-
-    pass
-
-
-class InvalidRequestError(Error):
-    """Summary."""
-
-    pass
-class PostException(Exception):
-    pass
+</h3>
