@@ -50,6 +50,8 @@ from .institution import Institution
 from .issuing import Issuing
 from .transactions import Transactions
 from .misc import Misc
+from .transfer import Transfers
+from .wallets import Wallets
 
 
 class Authenticate:
@@ -133,6 +135,12 @@ class Authenticate:
     
     def transactions(self):
         return Transactions(self.__request__)
+    
+    def transfer(self):
+        return Transfers(self.__request__)
+    
+    def wallet(self):
+        return Wallets(self.__request__)
 
 
 

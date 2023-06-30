@@ -1,5 +1,4 @@
 
-
 """
     Maplerad API wrapper.
 
@@ -36,26 +35,110 @@
 
 
 
+from typing import Optional, Dict
 
-class Misc:
+
+
+class Transfers:
     def __init__(self, request) -> None:
-        self.session = request
+        self.request = request
 
-
-    def get_currencies(self):
+    def naira_transfer(self, payload: Dict[str, str]):
         """
-        Get all currencies.
+        Initiate a Naira transfer.
 
+        :param payload: Transfer payload.
         :return: Response object from the API.
 
         Usage:
         >>> from maplerad_python import Authenticate
         >>> auth = Authenticate(secret_key,"DEVELOPMENT")
-        >>> misc = auth.misc()
-        >>> result = misc.get_currencies()
+        >>> transfers = auth.transfer()
+        >>> result = transfers.naira_transfer(payload)
         """
         try:
-            endpoint = "/currencies"
+            endpoint = "/transfers"
+            response = self.request("POST", endpoint, json=payload)
+
+            if response.status_code in (200, 201):
+                return response
+            else:
+                return response.json()
+
+        except Exception as error:
+            return error
+
+    def dom_transfer(self, payload: Dict[str, str]):
+        """
+        Initiate a DOM transfer.
+
+        :param payload: Transfer payload.
+        :return: Response object from the API.
+
+        Usage:
+        >>> >>> from maplerad_python import Authenticate
+        >>> auth = Authenticate(secret_key,"DEVELOPMENT")
+        >>> transfers = auth.transfer()
+        >>> result = transfers.dom_transfer(payload)
+        """
+        if payload["meta"]["scheme"] != "DOM":
+            return "Invalid Scheme type for this method"
+
+        try:
+            endpoint = "/transfers"
+            response = self.request("POST", endpoint, json=payload)
+
+            if response.status_code in (200, 201):
+                return response
+            else:
+                return response.json()
+
+        except Exception as error:
+            return error
+
+    def cash_pickup_transfer(self, payload: Dict[str, str]):
+        """
+        Initiate a Cash Pickup transfer.
+
+        :param payload: Transfer payload.
+        :return: Response object from the API.
+
+        Usage:
+        >>> >>> from maplerad_python import Authenticate
+        >>> auth = Authenticate(secret_key,"DEVELOPMENT")
+        >>> transfers = auth.transfer()
+        >>> result = transfers.cash_pickup_transfer(payload)
+        """
+        if payload["meta"]["scheme"] != "CASHPICKUP":
+            return "Invalid Scheme type for this method"
+
+        try:
+            endpoint = "/transfers"
+            response = self.request("POST", endpoint, json=payload)
+
+            if response.status_code in (200, 201):
+                return response
+            else:
+                return response.json()
+
+        except Exception as error:
+            return error
+
+    def get_transfer(self, transfer_id: str):
+        """
+        Get details of a specific transfer.
+
+        :param transfer_id: The ID of the transfer.
+        :return: Response object from the API.
+
+        Usage:
+        >>> >>> from maplerad_python import Authenticate
+        >>> auth = Authenticate(secret_key,"DEVELOPMENT")
+        >>> transfers = auth.transfer()
+        >>> result = transfers.get_transfer("transfer_id")
+        """
+        try:
+            endpoint = f"/transfers/{transfer_id}"
             response = self.request("GET", endpoint)
 
             if response.status_code in (200, 201):
@@ -66,50 +149,21 @@ class Misc:
         except Exception as error:
             return error
 
-    def get_countries(self):
+    def get_all_transfers(self):
         """
-        Get all countries.
+        Get details of all transfers.
 
         :return: Response object from the API.
 
         Usage:
         >>> from maplerad_python import Authenticate
         >>> auth = Authenticate(secret_key,"DEVELOPMENT")
-        >>> misc = auth.misc()
-        >>> result = misc.get_countries()
+        >>> transfers = auth.transfer()
+        >>> result = transfers.get_all_transfers()
         """
         try:
-            endpoint = "/countries"
+            endpoint = "/transfers"
             response = self.request("GET", endpoint)
-
-            if response.status_code in (200, 201):
-                return response
-            else:
-                return response.json()
-
-        except Exception as error:
-            return error
-
-    def credit_test_wallet(self, payload: dict):
-        """
-        Credit the test wallet.
-
-        :param payload: Payload for crediting the test wallet.
-        :return: Response object from the API.
-
-        Usage:
-        >>> from maplerad_python import Authenticate
-        >>> auth = Authenticate(secret_key,"DEVELOPMENT")
-        >>> misc = auth.misc()
-        >>> payload = {
-                "amount": "100",
-                "currency": "USD"
-            }
-        >>> result = misc.credit_test_wallet(payload)
-        """
-        try:
-            endpoint = "/test/wallet/credit"
-            response = self.request("GET", endpoint, json=payload)
 
             if response.status_code in (200, 201):
                 return response
