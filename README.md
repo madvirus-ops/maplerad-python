@@ -401,12 +401,14 @@ result = institution.resolve_institution(payload)
 
 ```
 
-
-
-## Create a Card
-
+### Issuing
 ```py
 issuing = auth.issuing()
+```
+
+### Create a Card
+
+```py
 payload = {
     "customer_id": "123456789",
     "type": "VIRTUAL",
@@ -419,5 +421,87 @@ payload = {
 result = issuing.create_card(payload)
 
 
+
+```
+### Create business card
+
+```py
+payload = {
+                "customer_id": "123456789",
+                "type": CardType.PHYSICAL.value,
+                "currency": "USD",
+                "auto_approve": True,
+                "brand": "MASTERCARD",
+                "amount": 2000,
+                "card_pin": 5678,
+                "name": "Business Card"
+            }
+result = issuing.create_business_card(payload)
+
+```
+
+### Set Card pin
+```py
+
+result = issuing.set_card_pin(cardID, pin)
+
+```
+
+### Get Card
+```py
+
+result = issuing.get_card(cardID)
+```
+
+
+### Get all Cards
+```py
+
+result = issuing.get_all_cards()
+
+```
+
+
+### Get card transactions
+
+```py
+
+params = {
+                "page": "1",
+                "pageSize": "10",
+                "type": "purchase",
+                "status": "success"
+            }
+result = issuing.get_card_transactions(cardID, params)
+
+
+```
+
+
+### Fund Card
+```py
+amount = 1000
+result = issuing.fund_card(cardID, amount)
+
+```
+
+
+### Withdraw from card
+```py
+
+result = issuing.withdraw_from_card(cardID, amount)
+```
+
+
+### Freeze card
+```py
+
+result = issuing.freeze_card(cardID)
+```
+
+
+### Unfreeze card
+```py
+result = issuing.unfreeze_card(cardID)
 
 ```
