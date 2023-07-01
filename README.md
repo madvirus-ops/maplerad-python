@@ -232,7 +232,6 @@ result = bills.buy_airtime(payload)
 
 ```
 
-
 ### Get airtime billers
 
 ```py
@@ -241,7 +240,6 @@ result = bills.get_airtime_billers(country)
 
 
 ```
-
 
 ### Get airtime history
 
@@ -252,7 +250,6 @@ result = bills.get_airtime_history()
 
 
 ```
-
 
 ## Collections
 
@@ -290,10 +287,12 @@ result = collections.create_virtual_account(payload)
 ```
 
 ## Counterparty
+
 ```py
 counterparty = auth.counterparty()
 
 ```
+
 ### Blacklist a counterparty
 
 ```py
@@ -316,13 +315,12 @@ result = counterparty.get_all_counterparties()
 
 ```
 
-
 ## FX
+
 ```py
 fx = auth.fx()
 
 ```
-
 
 ### Generate quote
 
@@ -337,8 +335,8 @@ result = fx.generate_quote(payload)
 
 ```
 
-
 ### Exchange currency
+
 ```py
 
 result = fx.exchange_currency(quote_reference)
@@ -346,11 +344,13 @@ result = fx.exchange_currency(quote_reference)
 ```
 
 ### Get FX history
+
 ```py
 
 result = fx.get_fx_history()
 
 ```
+
 ## IDentity
 
 ```py
@@ -358,7 +358,6 @@ identity = auth.identity()
 
 
 ```
-
 
 ### Verify Identity
 
@@ -368,10 +367,8 @@ result = identity.verify_identity(bvn)
 
 ```
 
-
-
-
 ## Institution
+
 ```py
 institution = auth.institution()
 
@@ -391,6 +388,7 @@ result = institution.get_all_institutions(params)
 ```
 
 ### Resolve institution
+
 ```py
 
 payload = {
@@ -402,6 +400,7 @@ result = institution.resolve_institution(payload)
 ```
 
 ### Issuing
+
 ```py
 issuing = auth.issuing()
 ```
@@ -423,6 +422,7 @@ result = issuing.create_card(payload)
 
 
 ```
+
 ### Create business card
 
 ```py
@@ -441,6 +441,7 @@ result = issuing.create_business_card(payload)
 ```
 
 ### Set Card pin
+
 ```py
 
 result = issuing.set_card_pin(cardID, pin)
@@ -448,19 +449,19 @@ result = issuing.set_card_pin(cardID, pin)
 ```
 
 ### Get Card
+
 ```py
 
 result = issuing.get_card(cardID)
 ```
 
-
 ### Get all Cards
+
 ```py
 
 result = issuing.get_all_cards()
 
 ```
-
 
 ### Get card transactions
 
@@ -477,44 +478,44 @@ result = issuing.get_card_transactions(cardID, params)
 
 ```
 
-
 ### Fund Card
+
 ```py
 amount = 1000
 result = issuing.fund_card(cardID, amount)
 
 ```
 
-
 ### Withdraw from card
+
 ```py
 
 result = issuing.withdraw_from_card(cardID, amount)
 ```
 
-
 ### Freeze card
+
 ```py
 
 result = issuing.freeze_card(cardID)
 ```
 
-
 ### Unfreeze card
+
 ```py
 result = issuing.unfreeze_card(cardID)
 
 ```
 
-
 ## Misc
+
 ```py
 
 misc = auth.misc()
 ```
 
-
 ### Get currencies
+
 ```py
 
 result = misc.get_currencies()
@@ -522,13 +523,14 @@ result = misc.get_currencies()
 ```
 
 ### Get countries
+
 ```py
 result = misc.get_countries()
 
 ```
 
-
 ### Credit test wallet
+
 ```py
 payload = {
                 "amount": "100",
@@ -538,8 +540,8 @@ result = misc.credit_test_wallet(payload)
 
 ```
 
-
 ## Transactions
+
 ```py
 transactions = auth.transactions()
 
@@ -547,17 +549,18 @@ transactions = auth.transactions()
 ```
 
 ### Get all transactions
+
 ```py
 result = transactions.get_all_transactions()
 
 ```
 
 ### Get a transaction
+
 ```py
 result = transactions.get_transaction("transaction_id")
 
 ```
-
 
 ### Verify a collection transaction
 
@@ -569,12 +572,14 @@ result = transactions.verify_collection_transaction("transaction_id")
 ```
 
 ## Transfers
+
 ```py
 transfers = auth.transfer()
 
 ```
 
 ### Naira transfer
+
 ```py
 payload = {
     "account_number": "string",
@@ -584,7 +589,9 @@ payload = {
 }
 result = transfers.naira_transfer(payload)
 ```
+
 ### DOM transfer
+
 ```py
 payload= {
     "account_number": "1234567890",
@@ -618,6 +625,7 @@ result = transfers.dom_transfer(payload)
 ```
 
 ### Cash Pickup
+
 ```py
 payload = {
     "account_number": "1234567890",
@@ -649,8 +657,8 @@ result = transfers.cash_pickup_transfer(payload)
 
 ```
 
-
 ### Get a transfer
+
 ```py
 
 result = transfers.get_transfer("transfer_id")
@@ -658,7 +666,42 @@ result = transfers.get_transfer("transfer_id")
 ```
 
 ### Get all transfers
+
 ```py
 result = transfers.get_all_transfers()
 
 ```
+
+## Wallet
+
+```py
+wallets = auth.wallet()
+
+```
+
+### Get wallets
+
+```py
+result = wallets.get_wallets()
+
+```
+
+### Get wallet history
+
+```py
+
+result = wallets.get_wallets_history()
+
+```
+
+### Get wallet history by currency
+
+```py
+result = wallets.get_wallets_history_by_currency("USD")
+
+```
+
+# Contact Developer
+<p>Twitter: <a href="https://twitter.com/1madvirus"> 1madvirus </a> </p>
+<p>LinkedIN: <a href="https://linkedin.com/in/madvirus"> Edwin Beshel Ayabie </a> </p>
+<p>Email: <a href="mailto:edwinayabie1@gmail.com"> edwinayabie1@gmail.com </p>
