@@ -399,7 +399,7 @@ result = institution.resolve_institution(payload)
 
 ```
 
-### Issuing
+## Issuing
 
 ```py
 issuing = auth.issuing()
