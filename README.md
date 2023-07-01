@@ -537,3 +537,31 @@ payload = {
 result = misc.credit_test_wallet(payload)
 
 ```
+
+
+## Transactions
+```py
+transactions = auth.transactions()
+
+
+```
+
+### Get all transactions
+```py
+result = transactions.get_all_transactions()
+
+```
+
+### Get a transaction
+```py
+result = transactions.get_transaction("transaction_id")
+
+```
+
+
+### Verify a collection transaction
+
+```py
+
+result = transactions.verify_collection_transaction("transaction_id")
+```
