@@ -505,3 +505,35 @@ result = issuing.freeze_card(cardID)
 result = issuing.unfreeze_card(cardID)
 
 ```
+
+
+## Misc
+```py
+
+misc = auth.misc()
+```
+
+
+### Get currencies
+```py
+
+result = misc.get_currencies()
+
+```
+
+### Get countries
+```py
+result = misc.get_countries()
+
+```
+
+
+### Credit test wallet
+```py
+payload = {
+                "amount": "100",
+                "currency": "USD"
+            }
+result = misc.credit_test_wallet(payload)
+
+```
