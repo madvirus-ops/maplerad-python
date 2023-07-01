@@ -68,7 +68,6 @@ customer = auth.customers()
 
 ```
 
-
 ### Create a Customer
 
 ```py
@@ -129,7 +128,6 @@ result = customer.upgrade_customer_tier2(payload)
 
 ```
 
-
 ### Get a customer
 
 ```py
@@ -144,6 +142,7 @@ result = customer.get_customer(customer_id)
 result = customer.get_all_customers()
 
 ```
+
 ### Get customer cards
 
 ```py
@@ -164,19 +163,22 @@ result = customer.get_customer_transactions(customer_id)
 ```
 
 ### Get customer virtual accounts
+
 ```py
 result = customer.get_customer_virtual_accounts(customer_id)
 
 ```
 
-
 ### Customer Card enrollment
+
 ```py
 
 result = customer.customer_card_enrollment(customer_id, brand)
 
 ```
+
 ### Update Customer
+
 ```py
 
 payload = {
@@ -199,13 +201,58 @@ result = customer.update_customer(payload)
 
 ```
 
-
 ### Set customer Blacklist status
+
+<!-- <p>status can be True to blacklist the customer of False to remove the customer from blacklist</p> -->
+
 ```py
-<p>status can be True to blacklist the customer of False to remove the customer from blacklist
+
 result = customer.set_customer_blacklist_active(customer_id, status)
 
 ```
+
+## Bills
+
+```py
+
+bills = auth.bills()
+
+```
+
+### Buy Airtime
+
+```py
+
+payload = {
+                "phone_number": phone_number,
+                "identifier": identifier,
+                "amount": amount
+            }
+result = bills.buy_airtime(payload)
+
+```
+
+
+### Get airtime billers
+
+```py
+
+result = bills.get_airtime_billers(country)
+
+
+```
+
+
+### Get airtime history
+
+```py
+
+result = bills.get_airtime_history()
+
+
+
+```
+
 
 ## Create a Card
 
