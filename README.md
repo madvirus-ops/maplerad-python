@@ -254,6 +254,46 @@ result = bills.get_airtime_history()
 ```
 
 
+## Collections
+
+```py
+collections = auth.collections()
+
+
+```
+
+### Create Virtual account
+
+```py
+
+payload = {
+                "customer_id": customer_id,
+                "currency": currency_type,
+                "preferred_bank": preferred_bank,
+                "deposit_account_id": deposit_account_id,
+                "meta": {
+                    "occupation": occupation,
+                    "utility_bill": utility_bill_url_or_file,
+                    "bank_statement": bank_statement_url_or_file,
+                    "identity_type": identity_type,
+                    "identity_image": identity_image_url_or_file,
+                    "identity_number": identity_number,
+                    "identity_issued_date": identity_issued_date,
+                    "identity_expiration": identity_expiration
+                }
+            }
+
+result = collections.create_virtual_account(payload)
+
+
+
+```
+
+
+
+
+
+
 ## Create a Card
 
 ```py
