@@ -317,7 +317,40 @@ result = counterparty.get_all_counterparties()
 ```
 
 
+## FX
+```py
+fx = auth.fx()
 
+```
+
+
+### Generate quote
+
+```py
+payload = {
+    "source_currency": "NGN",
+    "target_currency": "USD",
+    "amount": "500",
+}
+result = fx.generate_quote(payload)
+
+
+```
+
+
+### Exchange currency
+```py
+
+result = fx.exchange_currency(quote_reference)
+
+```
+
+### Get FX history
+```py
+
+result = fx.get_fx_history()
+
+```
 
 
 ## Create a Card
