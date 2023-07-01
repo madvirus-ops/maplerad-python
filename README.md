@@ -289,6 +289,32 @@ result = collections.create_virtual_account(payload)
 
 ```
 
+## Counterparty
+```py
+counterparty = auth.counterparty()
+
+```
+### Blacklist a counterparty
+
+```py
+result = counterparty.blacklist(counterpartyID, status)
+
+```
+
+### Get counterparty
+
+```py
+result = counterparty.get_counterparty(counterpartyID)
+
+```
+
+### Get all counterparties
+
+```py
+
+result = counterparty.get_all_counterparties()
+
+```
 
 
 
