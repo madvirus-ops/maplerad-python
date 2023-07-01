@@ -58,7 +58,7 @@ class Authenticate:
     
     def __init__(self,secret_key,environment):
         """
-            :param environment -> PRODDUCTION || DEVELOPMENT  
+            :param environment -> PRODUCTION || DEVELOPMENT  
         """
         self.secret_key = secret_key
         self.session = self.__request_adapter__()
@@ -147,9 +147,5 @@ class Authenticate:
 
 
 
-
-auth = Authenticate("shshsj","PRODUCTION")
-cus = auth.customer()
-iss = auth.issuing()
 
 

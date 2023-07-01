@@ -4,18 +4,18 @@ The library follows an object-oriented approach
 
 There are currently twelve (12) base categories namely:
 
--   Customer
--   Collections
--   Transfer
--   Bills
--   Wallets
--   Issuing
--   Identity
--   Transactions
--   Counterparty
--   Forex
--   Institutions
--   Misc
+- Customer
+- Collections
+- Transfer
+- Bills
+- Wallets
+- Issuing
+- Identity
+- Transactions
+- Counterparty
+- Forex
+- Institutions
+- Misc
 
 #### Learn more from the [docs](https://maplerad.dev/reference)
 
@@ -34,8 +34,8 @@ A secret key is needed for authorization. It can be gotten from the Maplerad das
 
 Maplerad provides two environments to ensure a smooth and easy experience.
 
--   sandbox: for development
--   live: for production
+- sandbox: for development
+- live: for production
 
 ## Sandbox
 
@@ -60,11 +60,150 @@ environment = "DEVELOPMENT"
 auth = Authenticate(secret_key,environment)
 ```
 
-## Get all Customers
+## Customers
 
 ```py
+
 customer = auth.customers()
+
+```
+
+
+### Create a Customer
+
+```py
+payload = {
+        "email": user.email,
+        "first_name": user.first_name,
+        "last_name": user.last_name,
+        "country": country_type
+        }
+
+result = customer.create_customer(payload)
+
+
+```
+
+### Upgrade Customer tier 1
+
+```py
+payload = {
+                    "customer_id": customer_id,
+                    "phone": {
+                        "phone_number": phone_number,
+                        "phone_short_code": phone_short_code
+                    },
+                    "address": {
+                        "city": address.city,
+                        "country": address.country,
+                        "postal_code": address.postal_code,
+                        "state": address.state,
+                        "street": address.street,
+                        "street2": address.street2
+                    },
+                    "dob": dob,
+                    "identification_number": identification_number
+                }
+
+result = customer.upgrade_customer_tier1(payload)
+
+
+
+```
+
+### Upgrade customer tier2
+
+```py
+payload = {
+                "customer_id": customer_id,
+                "identity": {
+                    "country": identity.country,
+                    "image": identity.image,
+                    "number": identity.number,
+                    "type": identity.type
+                }
+            }
+
+result = customer.upgrade_customer_tier2(payload)
+
+
+```
+
+
+### Get a customer
+
+```py
+result = customer.get_customer(customer_id)
+
+
+```
+
+### Get all Customers
+
+```py
 result = customer.get_all_customers()
+
+```
+### Get customer cards
+
+```py
+
+result = customer.get_customer_cards(customer_id)
+
+
+```
+
+### Get customer transactions
+
+```py
+
+
+result = customer.get_customer_transactions(customer_id)
+
+
+```
+
+### Get customer virtual accounts
+```py
+result = customer.get_customer_virtual_accounts(customer_id)
+
+```
+
+
+### Customer Card enrollment
+```py
+
+result = customer.customer_card_enrollment(customer_id, brand)
+
+```
+### Update Customer
+```py
+
+payload = {
+                "customer_id": customer_id,
+                "photo": photo,
+                "phone": {
+                    "phone_number": phone.phone_number,
+                    "phone_country_code": phone.phone_country_code
+                },
+                "middle_name": middle_name,
+                "identity": {
+                    "country": identity.country,
+                    "image": identity.image,
+                    "number": identity.number,
+                    "type": identity.type
+                }
+            }
+
+result = customer.update_customer(payload)
+
+```
+
+
+### Set customer Blacklist status
+```py
+<p>status can be True to blacklist the customer of False to remove the customer from blacklist
+result = customer.set_customer_blacklist_active(customer_id, status)
 
 ```
 
