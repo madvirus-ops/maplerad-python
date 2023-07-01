@@ -351,6 +351,56 @@ result = fx.exchange_currency(quote_reference)
 result = fx.get_fx_history()
 
 ```
+## IDentity
+
+```py
+identity = auth.identity()
+
+
+```
+
+
+### Verify Identity
+
+```py
+
+result = identity.verify_identity(bvn)
+
+```
+
+
+
+
+## Institution
+```py
+institution = auth.institution()
+
+```
+
+### Get all institutions
+
+```py
+params = {
+                "page": "1",
+                "pageSize": "10",
+                "type": "bank",
+                "country": "US"
+            }
+result = institution.get_all_institutions(params)
+
+```
+
+### Resolve institution
+```py
+
+payload = {
+                "account_number": "1234567890",
+                "bank_code": "ABC123"
+            }
+result = institution.resolve_institution(payload)
+
+```
+
 
 
 ## Create a Card
