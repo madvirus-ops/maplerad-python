@@ -564,4 +564,101 @@ result = transactions.get_transaction("transaction_id")
 ```py
 
 result = transactions.verify_collection_transaction("transaction_id")
+
+
+```
+
+## Transfers
+```py
+transfers = auth.transfer()
+
+```
+
+### Naira transfer
+```py
+payload = {
+    "account_number": "string",
+    "amount": 45454545,
+    "bank_code": "string",
+    "currency": "NGN",
+}
+result = transfers.naira_transfer(payload)
+```
+### DOM transfer
+```py
+payload= {
+    "account_number": "1234567890",
+    "amount": 1000.0,
+    "bank_code": "ABC",
+    "currency": "USD",
+    "meta": {
+        "scheme": "DOM",
+        "sender": {
+            "first_name": "John",
+            "last_name": "Doe",
+            "phone_number": "1234567890",
+            "address": "123 Main Street",
+            "country": "USA"
+        },
+        "counterparty": {
+            "first_name": "Jane",
+            "last_name": "Smith",
+            "phone_number": "9876543210",
+            "address": "456 Elm Street",
+            "country": "Canada",
+            "identity": "12345"
+        }
+    },
+    "reason": "Payment",
+    "reference": "ABC123"
+}
+result = transfers.dom_transfer(payload)
+
+
+```
+
+### Cash Pickup
+```py
+payload = {
+    "account_number": "1234567890",
+    "amount": 1000.0,
+    "bank_code": "ABC",
+    "currency": "USD",
+    "meta": {
+        "scheme": "CASHPICKUP",
+        "sender": {
+            "first_name": "John",
+            "last_name": "Doe",
+            "phone_number": "1234567890",
+            "address": "123 Main Street",
+            "country": "USA"
+        },
+        "counterparty": {
+            "first_name": "Jane",
+            "last_name": "Smith",
+            "phone_number": "9876543210",
+            "address": "456 Elm Street",
+            "country": "Canada",
+            "identity": "12345"
+        }
+    },
+    "reason": "Payment",
+    "reference": "ABC123"
+}
+result = transfers.cash_pickup_transfer(payload)
+
+```
+
+
+### Get a transfer
+```py
+
+result = transfers.get_transfer("transfer_id")
+
+```
+
+### Get all transfers
+```py
+result = transfers.get_all_transfers()
+
 ```
